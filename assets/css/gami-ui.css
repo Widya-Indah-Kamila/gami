@@ -205,3 +205,76 @@ body.is-dash{background:#f4f4fd}
  .pk-row{flex-wrap:wrap}
 }
 @media(prefers-reduced-motion:reduce){.pk-btn,.pk-hand{transition:none}.pk-btn:hover{transform:none}.pk-btn:hover .pk-hand{transform:none}}
+
+/* =====================================================================
+   REVISI NAVIGASI (logo = Beranda, progress bar, sidebar materi, tombol play/mulai)
+   ===================================================================== */
+
+/* ---- 1. Landing page: tombol play ---- */
+.wl-play{position:relative;display:grid;place-items:center;flex:none;margin-top:2.6vw;width:clamp(4.6rem,7.5vw,7.5rem);aspect-ratio:1;padding:0;border:0;border-radius:50%;cursor:pointer;background:#ffd23f;color:#1d1654;box-shadow:0 6px 0 #e8b92f,0 14px 26px rgba(91,61,240,.2);transition:background .2s,box-shadow .2s}
+.wl-play svg{width:42%;height:42%;margin-left:7%;transition:transform .2s}
+.wl-play::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid #ffd23f;pointer-events:none;animation:wlPing 1.9s ease-out infinite}
+.wl-play:hover{background:#ffe18c;box-shadow:0 8px 0 #e8b92f,0 20px 30px rgba(91,61,240,.3)}
+.wl-play:hover svg{transform:scale(1.15)}
+.wl-play:active{box-shadow:0 3px 0 #e8b92f}
+.wl-play:focus-visible{outline:4px solid #3b2f8f;outline-offset:4px}
+@keyframes wlPing{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.55);opacity:0}}
+@media(prefers-reduced-motion:reduce){.wl-play::after{animation:none;display:none}.wl-play svg{transition:none}}
+
+/* ---- 2. Beranda: kartu lebih ringkas + tombol Mulai Belajar tanpa scroll ---- */
+#pg.dash{display:flex;flex-direction:column;gap:clamp(.7rem,2vh,1.4rem)}
+#pg.dash>.gd-grid{flex:0 1 36rem;min-height:0;height:auto;margin-top:auto}
+#pg.dash>.gd-grid>button{min-height:7rem}
+#pg.dash>.gd-cta{flex:none;height:auto;margin-bottom:auto;display:flex;justify-content:center;padding:0 0 .9rem}
+.gd-start{display:inline-flex;align-items:center;gap:.7rem;border:0;border-radius:999px;background:var(--ye);color:var(--ink);font-family:'Baloo 2','Poppins',system-ui,sans-serif;font-weight:800;font-size:clamp(1.1rem,1.7vw,1.5rem);line-height:1.1;padding:.7em 2.1em;cursor:pointer;box-shadow:0 6px 0 #e8b92f,0 14px 26px rgba(91,61,240,.2);transition:transform .2s,background .2s,box-shadow .2s}
+.gd-start svg{transition:transform .2s}
+.gd-start:hover{transform:translateY(-3px);background:#ffe18c;box-shadow:0 9px 0 #e8b92f,0 20px 30px rgba(91,61,240,.3)}
+.gd-start:hover svg{transform:translateX(5px)}
+.gd-start:active{transform:translateY(3px);box-shadow:0 3px 0 #e8b92f}
+.gd-start:focus-visible{outline:4px solid var(--pu);outline-offset:3px}
+@media(max-width:639px){#pg.dash>.gd-cta{position:sticky;bottom:0;padding:.7rem 0 .9rem;background:linear-gradient(rgba(244,244,253,0),#f4f4fd 35%)}}
+@media(prefers-reduced-motion:reduce){.gd-start,.gd-start svg{transition:none}}
+
+/* ---- 3. Navigasi atas: logo bisa diklik, progress bar ---- */
+.logo[role=link]{cursor:pointer;border-radius:24px;transition:filter .2s}
+.logo[role=link]:hover{filter:brightness(1.12)}
+.logo[role=link]:focus-visible{outline:3px solid var(--ye);outline-offset:4px}
+header nav.gp{margin-left:auto;display:flex;flex-wrap:nowrap;align-items:center;gap:10px;flex:0 1 380px;min-width:170px}
+.gp .gp-l{color:#fff;font-weight:600;font-size:13px;white-space:nowrap}
+.gp .gp-t{flex:1;height:12px;border-radius:8px;background:#ffffff2e;overflow:hidden}
+.gp .gp-t i{display:block;height:100%;min-width:0;border-radius:8px;background:var(--ye);transition:width .5s ease}
+.gp b{color:#fff;font-size:14px;min-width:40px;text-align:right}
+@media(max-width:520px){.gp .gp-l{display:none}header nav.gp{flex-basis:100%}}
+
+/* ---- 4. Sidebar Materi ---- */
+body #side.sb{width:300px;flex:none;display:flex;flex-direction:column;gap:10px;padding:14px 12px;background:var(--soft);border-radius:24px;overflow-y:auto;max-height:none}
+body.sb-closed #side.sb{display:none}
+.sb-h{display:flex;align-items:center;justify-content:space-between;padding:0 4px 0 6px}
+.sb-h b{font-size:19px;font-weight:800;color:var(--ink)}
+.sb-x,.sb-burger{flex:none;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 8px rgba(91,61,240,.18);transition:transform .15s,background .15s}
+.sb-x:hover,.sb-burger:hover{transform:scale(1.08);background:var(--ye)}
+.sb-x:focus-visible,.sb-burger:focus-visible,.sb-mt:focus-visible,.sb-i:focus-visible{outline:3px solid var(--pu);outline-offset:2px}
+.sb-burger{display:none}
+body.sb-closed .sb-burger{display:grid}
+.sb-l,.sb-s{list-style:none;margin:0;padding:0}
+.sb-l{display:flex;flex-direction:column;gap:8px}
+.sb-mt{width:100%;display:flex;align-items:center;gap:10px;padding:11px 12px;border:0;border-radius:18px;background:var(--card);color:var(--ink);text-align:left;font:700 14px/1.25 'Poppins',system-ui,sans-serif;cursor:pointer}
+.sb-n{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--pu);color:#fff;font-size:13px;font-weight:700}
+.sb-m.lock .sb-n{background:#d9d4f5;font-size:13px}
+.sb-m.lock .sb-t{color:var(--mut)}
+.sb-t{flex:1}
+.sb-ch{flex:none;display:grid;place-items:center;transition:transform .2s}
+.sb-m.open .sb-ch{transform:rotate(90deg)}
+.sb-s{display:none;flex-direction:column;gap:3px;margin:6px 0 2px 16px;padding-left:10px;border-left:3px solid #d3cdf3}
+.sb-m.open .sb-s{display:flex}
+.sb-i{width:100%;display:flex;align-items:flex-start;gap:9px;padding:8px 10px;border:0;border-radius:14px;background:transparent;color:var(--tx);text-align:left;font:600 13px/1.3 'Poppins',system-ui,sans-serif;cursor:pointer}
+.sb-i i{flex:none;width:20px;text-align:center;font-style:normal;font-size:12px;line-height:1.5}
+.sb-i:hover:not(:disabled){background:var(--card)}
+.sb-i.on{background:var(--ye);color:#1d1654;font-weight:700}
+.sb-i.lock,.sb-i:disabled{color:var(--mut);cursor:not-allowed}
+/* layar sempit: sidebar menjadi panel melayang agar isi materi tetap lebar */
+@media(max-width:820px){body #side.sb{position:fixed;z-index:60;top:12px;bottom:12px;left:12px;width:min(320px,calc(100vw - 24px));box-shadow:0 20px 50px rgba(18,10,66,.4)}}
+
+/* ---- 5. Footer: tanpa progress bar bullet di tengah ---- */
+footer{justify-content:space-between}
+footer .dots,#dots{display:none!important}
